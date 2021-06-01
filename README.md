@@ -12,18 +12,27 @@
 ## 安装部署
 
 ### 必要软件
-
+后端：
 * Java编程环境、工具IDEA
 * 数据库 MySQL
 * 缓存中间件 Redis
 * 消息中间件 RabbitMQ
+前端：
+* vue、vue-cli、vue-router
+* element-ui
+* echarts、DataV
+* axios
 
 ### 安装步骤
-
+后端：
 * clone 该项目到本地
 * IDEA引入并装载此文件，引入完毕对应的依赖包(pom.xml)
 * 修改主配置文件 application.yml，将对应项目软件用户名、密码修改为自己主机持有的
 * 配置完毕开启运行
+前端：
+* 项目加载到vscode中，运行 `npm install` 命令下载所需的插件
+* 修改项目请求的基础地址 `request.js`中更改 `baseUrl=xxxx`
+* `npm run dev`运行起前端项目
 
 **注意： 如果采用的是云服务器上的软件，需要进行安全组配置同时防火墙开放部分端口！**
 
