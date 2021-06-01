@@ -1,4 +1,4 @@
-<img src="../passageImg/icon.png" align="right" />
+<img src="passageImg/icon.png" align="right" />
 
 # MyDNS
 > 一款自实现的DNS服务器
@@ -33,19 +33,19 @@
 
 使用本地工具 `nslookup` 进行测试，windows环境下直接打开cmd输入 `nslookup`命令即可使用。
 
-![image-20210601122548723](../passageImg/readme.assets/image-20210601122548723.png)
+![image-20210601122548723](passageImg/readme.assets/image-20210601122548723.png)
 
 ![image-20210601123054751](../passageImg/readme.assets/image-20210601123054751.png)
 
 ### 浏览器在线测试
 
-![image-20210601123226026](../passageImg/readme.assets/image-20210601123226026.png)
+![image-20210601123226026](passageImg/readme.assets/image-20210601123226026.png)
 
 ![image-20210601123316067](../passageImg/readme.assets/image-20210601123316067.png)
 
 知乎能够访问，因此数据库中配置规则并没有配置  www.zhihu.com 的映射，会访问更上层的DNS服务器；
 
-![image-20210601123517290](../passageImg/readme.assets/image-20210601123517290.png)
+![image-20210601123517290](passageImg/readme.assets/image-20210601123517290.png)
 
 百度无法访问，因为数据库中配置 www.baidu.com 映射的IP地址为 192.168.111
 
@@ -57,13 +57,13 @@
 
 ### DNS域名映射管理
 
-![image-20210601124009996](../passageImg/readme.assets/image-20210601124009996.png)
+![image-20210601124009996](passageImg/readme.assets/image-20210601124009996.png)
 
 ![image-20210601124144521](../passageImg/readme.assets/image-20210601124144521.png)
 
 ### 使用向导
 
-![image-20210601124053948](../passageImg/readme.assets/image-20210601124053948.png)
+![image-20210601124053948](passageImg/readme.assets/image-20210601124053948.png)
 
 ## 作者
 
