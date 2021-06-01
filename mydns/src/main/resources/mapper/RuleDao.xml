@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xjx.mydns.dao.RuleDao">
+
+    <resultMap id="BaseResultMap" type="com.xjx.mydns.entity.Rule">
+        <id column="id" property="id"></id>
+        <result column="ipFrom" property="ipFrom"></result>
+        <result column="ipTo" property="ipTo"></result>
+        <result column="timeFrom" property="timeFrom"></result>
+        <result column="timeTo" property="timeTo"></result>
+        <result column="matchMode" property="matchMode"></result>
+        <result column="ruleName" property="ruleName"></result>
+        <result column="priority" property="priority"></result>
+        <result column="enabled" property="enabled"></result>
+        <result column="dispatchMode" property="dispatchMode"></result>
+    </resultMap>
+
+    <resultMap id="AllResultMap" type="com.xjx.mydns.entity.Rule">
+        <id column="id" property="id"></id>
+        <result column="ipFrom" property="ipFrom"></result>
+        <result column="ipTo" property="ipTo"></result>
+        <result column="timeFrom" property="timeFrom"></result>
+        <result column="timeTo" property="timeTo"></result>
+        <result column="matchMode" property="matchMode"></result>
+        <result column="ruleName" property="ruleName"></result>
+        <result column="priority" property="priority"></result>
+        <result column="enabled" property="enabled"></result>
+        <result column="dispatchMode" property="dispatchMode"></result>
+        <collection property="addressList" ofType="com.xjx.mydns.entity.Address">
+            <id column="aid" property="id"></id>
+            <result column="aruleId" property="ruleId"></result>
+            <result column="atype" property="type"></result>
+            <result column="addressName" property="address"></result>
+        </collection>
+    </resultMap>
+
+    <select id="selectRuleAndAddress" resultMap="AllResultMap">
+        SELECT
+           r.id          id,
+           r.ipFrom      ipFrom,
+           r.ipTo        ipTo,
+           r.timeFrom    timeFrom,
+           r.timeTo      timeTo,
+           r.matchMode   matchMode,
+           r.name        ruleName,
+           r.priority    priority,
+           r.enabled     enabled,
+           r.dispatchMode dispatchMode,
+           a.id          aid,
+           a.type        atype,
+           a.ruleId      ruleId,
+           a.address     addressName
+        FROM rule r
+          LEFT JOIN address a ON r.id = a.ruleId
+          ORDER BY r.priority DESC
+    </select>
+
+    <select id="selectRuleList" resultType="com.xjx.mydns.entity.Rule">
+        SELECT id,ipFrom,ipTo,timeFrom,timeTo,matchMode,name as ruleName,priority,enabled,dispatchMode from rule
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="AllResultMap">
+        SELECT
+           r.id          id,
+           r.ipFrom      ipFrom,
+           r.ipTo        ipTo,
+           r.timeFrom    timeFrom,
+           r.timeTo      timeTo,
+           r.matchMode   matchMode,
+           r.name        ruleName,
+           r.priority    priority,
+           r.enabled     enabled,
+           r.dispatchMode dispatchMode,
+           a.id          aid,
+           a.type        atype,
+           a.ruleId      ruleId,
+           a.address     addressName
+        FROM rule r
+          LEFT JOIN address a ON r.id = a.ruleId
+        WHERE r.id=#{id}
+    </select>
+
+    <delete id="deleteByPrimaryKey">
+        DELETE FROM rule WHERE id=#{id}
+    </delete>
+
+    <insert id="insert" parameterType="rule" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO rule(ipFrom,ipTo,timeFrom,timeTo,matchMode,name,priority,enabled,dispatchMode)
+        VALUES (#{ipFrom},#{ipTo},#{timeFrom},#{timeTo},#{matchMode},#{ruleName},#{priority},#{enabled},#{dispatchMode})
+    </insert>
+
+    <update id="updateByPrimaryKey" parameterType="com.xjx.mydns.entity.Rule">
+        UPDATE rule
+        <set>
+            <if test="id != null">
+                id=#{id},
+            </if>
+            <if test="ipFrom != null">
+                ipFrom=#{ipFrom},
+            </if>
+            <if test="ipTo != null">
+                ipTo=#{ipTo},
+            </if>
+            <if test="timeFrom != null">
+                timeFrom=#{timeFrom},
+            </if>
+            <if test="timeTo != null">
+                timeTo=#{timeTo},
+            </if>
+            <if test="matchMode != null">
+                matchMode=#{matchMode},
+            </if>
+            <if test="ruleName != null">
+                name=#{ruleName},
+            </if>
+            <if test="priority != null">
+                priority=#{priority},
+            </if>
+            <if test="enabled != null">
+                enabled=#{enabled},
+            </if>
+            <if test="dispatchMode != null">
+                dispatchMode=#{dispatchMode}
+            </if>
+        </set>
+        <where>
+            <if test="id != null">
+                id=#{id}
+            </if>
+        </where>
+    </update>
+</mapper>

@@ -1,0 +1,84 @@
+# 运行端口
+server:
+  port: 8081
+# 数据源
+spring:
+  datasource:
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://39.100.119.221:3306/dns-cheater?useUnicode=true&characterEncoding=UTF8&useSSL=false&serverTimezone=Asia/Shanghai
+    hikari:
+      minimum-idle: 10
+      maximum-pool-size: 50
+      connection-timeout: 10000
+      max-lifetime: 1800000
+# redis
+  redis:
+    host: 39.100.119.221
+    port: 6379
+    password: 123456
+    timeout: 5000
+    database: 3
+    lettuce:
+      pool:
+        max-idle: 50
+        min-idle: 0
+        max-active: 500
+    # 每个域名最多存储的IP地址的数量
+    dns-ip-max-num: 10
+    # 每隔多长时间进行一次过期扫描 10小时
+    scan-clean-frequence: 36000
+    # 每次扫描随机抓取多少个
+    scan-clean-number: 30
+    # 每个域名的有效期 24小时
+    dns-domain-max-lifeTime: 86400
+    dns-id-max-lifeTime: 28800
+# Rabbitmq
+  rabbitmq:
+    host: 39.100.119.221
+    port: 5672
+    username: root
+    password: 123456
+    virtual-host: /
+    # 消费者配置
+    listener:
+      simple:
+        concurrency: 10
+        max-concurrency: 10
+        prefetch: 1
+        auto-startup: true
+        default-requeue-rejected: true
+        retry:
+          enabled: true
+          max-interval: 6000
+          initial-interval: 6000
+    # 启用发送重试
+    template:
+      retry:
+        enabled: true
+        initial-interval: 1000
+        max-attempts: 3
+
+# mybatis
+mybatis:
+  type-aliases-package: com.xjx.mydns.entity
+  mapper-locations: classpath:/mapper/*Dao.xml
+
+
+# DNS
+dns.my.server.ip: 172.26.117.53
+dns.my.server.port: 53
+dns.my.server.name: myDNS
+dns.upstream.server.ip: 223.5.5.5
+dns.upstream.server.port: 53
+
+# pageHelper分页
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+
+logging:
+  level:
+    com.xjx.mydns.dao: debug

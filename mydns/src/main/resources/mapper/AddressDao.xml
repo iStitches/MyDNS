@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xjx.mydns.dao.AddressDao">
+    <resultMap id="BaseResultMap" type="com.xjx.mydns.entity.Address">
+        <id column="id" property="id"></id>
+        <result column="ruleId" property="ruleId"></result>
+        <result column="type" property="type"></result>
+        <result column="address" property="address"></result>
+    </resultMap>
+
+    <select id="selectList" resultMap="BaseResultMap">
+        SELECT * FROM address
+    </select>
+
+    <select id="getByRuleId" resultType="Address">
+        SELECT * FROM address
+        WHERE ruleId = #{ruleId}
+    </select>
+
+    <select id="selectByPrimaryKey">
+        SELECT * FROM address WHERE id=#{id}
+    </select>
+
+    <delete id="deleteByPrimaryKey">
+        DELETE FROM address WHERE id=#{id}
+    </delete>
+
+    <insert id="insert" parameterType="address" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO address(id,ruleId,type,address)
+        VALUES (#{id},#{ruleId},#{type},#{address})
+    </insert>
+
+    <insert id="batchInsert">
+        INSERT INTO address(ruleId,type,address) VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.ruleId},#{item.type},#{item.address})
+        </foreach>
+    </insert>
+
+    <update id="updateByPrimaryKey" parameterType="Address">
+        UPDATE address
+        <set>
+            <if test="address.id != null">
+                id=#{address.id}
+            </if>
+            <if test="address.ruleId != null">
+                ipFrom=#{address.ruleId}
+            </if>
+            <if test="address.type != null">
+                ipTo=#{address.type}
+            </if>
+            <if test="address.address != null">
+                timeFrom=#{address.address}
+            </if>
+        </set>
+        <where>
+            <if test="address.id != null">
+                id=#{address.id}
+            </if>
+        </where>
+    </update>
+</mapper>
