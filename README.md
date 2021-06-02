@@ -1,4 +1,4 @@
-<img src="passageImg/icon.png" align="right" />
+![](https://github.com/iStitches/MyDNS/passageImg/icon.png)
 
 # MyDNS
 > 一款自实现的DNS服务器
